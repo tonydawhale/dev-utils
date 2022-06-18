@@ -5,7 +5,7 @@ import { Link } from "@remix-run/react"
 const links = [
     [
         {
-            title: "JSON",
+            title: "JSON Formatter",
             href: "/json"
         }
     ]
@@ -13,7 +13,7 @@ const links = [
 
 export default function ShellNavbar () {
     return (
-        <Navbar p={"md"} width={{sm: 200}}>
+        <Navbar p={"md"} width={{sm: 250}}>
             <Navbar.Section>
                 <Center>
                     <Text<typeof Link> component={Link} to={"/"} variant={"gradient"} size={"md"} weight={"bold"} gradient={{from: "indigo", to: "cyan", deg: 45}} style={{fontSize: 24, fontFamily: 'Greycliff CF, sans-serif'}}>
