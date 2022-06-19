@@ -1,15 +1,7 @@
 import React from "react";
-import { Button, Center, Divider, Navbar, Text } from "@mantine/core";
+import {Button, Center, Divider, Navbar, Text, Stack, ScrollArea} from "@mantine/core";
 import { Link } from "@remix-run/react"
-
-const links = [
-    [
-        {
-            title: "JSON Formatter",
-            href: "/json"
-        }
-    ]
-]
+import { redirects } from "../../../../public/links";
 
 export default function ShellNavbar () {
     return (
@@ -22,25 +14,39 @@ export default function ShellNavbar () {
                 </Center>
             </Navbar.Section>
             <Divider/>
-            {
-                links.map((group, index) =>
-                    <Navbar.Section key={index} p={"md"}>
-                        {
-                            group.map((item) =>
-                                <Button
-                                    rel="noopener noreferrer"
-                                    component={"a"}
-                                    href={item.href}
-                                    fullWidth
-                                    key={item.title}
-                                >
-                                    {item.title}
-                                </Button>
+            <Navbar.Section p={"md"} grow component={ScrollArea} mx="-xs" px="xs">
+                {
+                    redirects.map((group, index) => {
+                        if (group.links.filter((item) => item.enabled).length > 0) {
+                            return (
+                                <>
+                                    <Divider key={index} label={group.sectionTitle} labelPosition="center"/>
+                                    <Stack spacing={"sm"}>
+                                        {
+                                            group.links.map((item, index) => {
+                                                if (item.enabled) {
+                                                    return (
+                                                        <Button
+                                                            rel="noopener noreferrer"
+                                                            component={"a"}
+                                                            href={item.href}
+                                                            fullWidth
+                                                            key={index}
+                                                            variant={"outline"}
+                                                        >
+                                                            {item.title}
+                                                        </Button>
+                                                    )
+                                                }
+                                            })
+                                        }
+                                    </Stack>
+                                </>
                             )
                         }
-                    </Navbar.Section>
-                )
-            }
+                    })
+                }
+            </Navbar.Section>
         </Navbar>
     )
 }

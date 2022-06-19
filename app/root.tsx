@@ -7,7 +7,8 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import React from "react";
+import React, {useEffect} from "react";
+import type { } from '@skyra/discord-components-core';
 
 import AppShell from "~/components/layout/Layout";
 
@@ -18,20 +19,33 @@ export const meta: MetaFunction = () => ({
 });
 
 export default function App() {
+    useEffect(() => {
+        window.$discordMessage = {
+            profiles: {
+                tonydawhale: {
+                    author: "tdw",
+                    avatar: "./public/icon.jpg",
+                    roleColor: "#429bb8",
+                    bot: true,
+                    verified: true
+                }
+            }
+        }
+    }, [])
   return (
-      <html lang="en">
-      <head>
-        <Meta />
-        <Links />
-      </head>
-      <body>
-      <AppShell>
-        <Outlet />
-      </AppShell>
-      <ScrollRestoration />
-      <Scripts />
-      <LiveReload />
-      </body>
-      </html>
+    <html lang="en">
+        <head>
+            <Meta />
+            <Links />
+        </head>
+        <body>
+            <AppShell>
+                <Outlet />
+            </AppShell>
+            <ScrollRestoration />
+            <Scripts />
+            <LiveReload />
+        </body>
+    </html>
   );
 }

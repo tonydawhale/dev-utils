@@ -11,7 +11,7 @@ function isJson(str: string) {
     return true;
 }
 
-export default function Json() {
+export default function JsonFormatter() {
     const [text, setText] = useState(JSON.stringify({foo: "bar"}));
     const [numSpaces, setNumSpaces] = useState(2);
 
