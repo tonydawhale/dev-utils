@@ -36,6 +36,14 @@ const example = `[
   }
 ]`
 
+const convert = (data: any) => {
+    try {
+        return unparse(JSON.parse(data),{delimiter: ";"})
+    } catch {
+        return "";
+    }
+}
+
 export default function JsonCsv() {
     const [text, setText] = useState(example);
 
@@ -60,14 +68,14 @@ export default function JsonCsv() {
                             value={text}
                             autosize
                             minRows={10}
-                            onChange={(value) => setText(value.target.value.trim())}
+                            onChange={(value) => setText(value.target.value)}
                         />
                     </Container>
                 </Grid.Col>
                 <Grid.Col span={1}>
                     <Container fluid>
                         <Textarea
-                            value={ unparse(JSON.parse(text),{delimiter: ";"}) }
+                            value={ convert(text.trim()) }
                             autosize
                             minRows={10}
                         />

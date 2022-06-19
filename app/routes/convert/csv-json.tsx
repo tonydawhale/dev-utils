@@ -36,7 +36,7 @@ export default function CsvJson() {
                             value={text}
                             autosize
                             minRows={10}
-                            onChange={(value) => setText(value.target.value.trim())}
+                            onChange={(value) => setText(value.target.value)}
                         />
                     </Container>
                 </Grid.Col>
@@ -53,7 +53,7 @@ export default function CsvJson() {
                         <Prism
                             language={"json"}
                             withLineNumbers
-                            children={ JSON.stringify(parse(text, {header: true}).data, null, numSpaces) }
+                            children={ JSON.stringify(parse(text.trim(), {header: true}).data, null, numSpaces) }
                             style={{height: "100%", overflow: "auto"}}
                         />
                     </Container>

@@ -27,7 +27,7 @@ export default function JsonFormatter() {
                             value={text}
                             autosize
                             minRows={10}
-                            onChange={(value) => setText(value.target.value.trim())}
+                            onChange={(value) => setText(value.target.value)}
                         />
                     </Container>
                 </Grid.Col>
@@ -53,7 +53,7 @@ export default function JsonFormatter() {
                         <Prism
                             language={"json"}
                             withLineNumbers
-                            children={isJson(text) ? `${JSON.stringify(JSON.parse(text), null, numSpaces)}` : "{}" }
+                            children={isJson(text) ? `${JSON.stringify(JSON.parse(text.trim()), null, numSpaces)}` : "{}" }
                             style={{height: "100%", overflow: "auto"}}
                         />
                     </Container>
