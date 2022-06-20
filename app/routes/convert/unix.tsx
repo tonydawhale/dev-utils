@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import CopyButton from "~/components/util/CopyButton";
-import { Center, Group, Select, TextInput, Grid, ActionIcon, Tooltip, Container, Table } from "@mantine/core";
+import { Group, Select, TextInput, Grid, ActionIcon, Tooltip } from "@mantine/core";
 import { RotateClockwise } from "tabler-icons-react";
 
 const units = {
@@ -36,19 +36,21 @@ export default function Unix() {
             value={time}
             onChange={(value) => setTime(parseInt(value.target.value))}
             rightSection={
-                <Tooltip
-                    label={"Refresh"}
-                >
-                    <ActionIcon
-                        onClick={() =>
-                            typeOfTime === "milliseconds" ?
-                                setTime(Date.now()) :
-                                setTime(Math.floor(Date.now()/1000))
-                        }
+                <>
+                    <Tooltip
+                        label={"Refresh"}
                     >
-                        <RotateClockwise/>
-                    </ActionIcon>
-                </Tooltip>
+                        <ActionIcon
+                            onClick={() =>
+                                typeOfTime === "milliseconds" ?
+                                    setTime(Date.now()) :
+                                    setTime(Math.floor(Date.now()/1000))
+                            }
+                        >
+                            <RotateClockwise/>
+                        </ActionIcon>
+                    </Tooltip>
+                </>
             }
         />,
         <Select
@@ -79,6 +81,26 @@ export default function Unix() {
             rightSection={
                 <CopyButton
                     payload={getRelativeTime(typeOfTime === "seconds" ? time * 1000 : time, Date.now()) as string}
+                    toolTipLocation={"right"}
+                />
+            }
+        />,
+        <TextInput
+            label={"UTC Timestamp"}
+            value={new Date( typeOfTime === "seconds" ? time * 1000 : time).toUTCString()}
+            rightSection={
+                <CopyButton
+                    payload={new Date( typeOfTime === "seconds" ? time * 1000 : time).toUTCString()}
+                    toolTipLocation={"right"}
+                />
+            }
+        />,
+        <TextInput
+            label={"ISO Timestamp"}
+            value={new Date( typeOfTime === "seconds" ? time * 1000 : time).toISOString()}
+            rightSection={
+                <CopyButton
+                    payload={new Date( typeOfTime === "seconds" ? time * 1000 : time).toISOString()}
                     toolTipLocation={"right"}
                 />
             }

@@ -1,16 +1,29 @@
 export const redirects = [
     {
+        sectionTitle: "Main",
+        links: [
+            {
+                title: "URL Shortener",
+                href: "/url-shortener",
+                enabled: false,
+                icon: "Link"
+            }
+        ]
+    },
+    {
         sectionTitle: "JSON Utilities",
         links: [
             {
                 title: "JSON Formatter",
                 href: "/json/formatter",
-                enabled: true
+                enabled: true,
+                icon: "Braces"
             },
             {
                 title: "JSON Validator",
                 href: "/json/validator",
-                enabled: false
+                enabled: false,
+                icon: "Braces"
             }
         ]
     },
@@ -20,27 +33,32 @@ export const redirects = [
             {
                 title: "Unix Time Converter",
                 href: "/convert/unix",
-                enabled: true
+                enabled: true,
+                icon: "Clock"
             },
             {
                 title: "JSON to CSV",
                 href: "/convert/json-csv",
-                enabled: true
+                enabled: true,
+                icon: "Replace"
             },
             {
                 title: "CSV to JSON",
                 href: "/convert/csv-json",
                 enabled: true,
+                icon: "Replace"
             },
             {
                 title: "JSON to YAML",
                 href: "/convert/json-yaml",
-                enabled: false
+                enabled: false,
+                icon: "Replace"
             },
             {
                 title: "YAML to JSON",
                 href: "/convert/yaml-json",
-                enabled: false
+                enabled: false,
+                icon: "Replace"
             }
         ]
     },
@@ -50,7 +68,8 @@ export const redirects = [
             {
                 title: "Discord Embed Generator",
                 href: "/discord-embed",
-                enabled: false
+                enabled: false,
+                icon: "SquarePlus"
             }
         ]
     }

@@ -15,10 +15,11 @@
     "postinstall": "remix-esbuild-override"
   },
   "dependencies": {
-    "@mantine/core": "^4.2.9",
+    "@mantine/core": "^4.2.10",
     "@mantine/dates": "^4.2.9",
-    "@mantine/hooks": "^4.2.9",
+    "@mantine/hooks": "^4.2.10",
     "@mantine/prism": "^4.2.9",
+    "@mantine/spotlight": "^4.2.10",
     "@mantine/ssr": "^4.2.9",
     "@remix-run/cloudflare": "^1.6.0",
     "@remix-run/cloudflare-pages": "^1.6.0",

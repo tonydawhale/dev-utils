@@ -10,7 +10,7 @@ import {
 import React, {useEffect} from "react";
 import type { } from '@skyra/discord-components-core';
 
-import AppShell from "~/components/layout/Layout";
+import Layout from "~/components/layout/Layout";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -39,9 +39,9 @@ export default function App() {
             <Links />
         </head>
         <body>
-            <AppShell>
+            <Layout>
                 <Outlet />
-            </AppShell>
+            </Layout>
             <ScrollRestoration />
             <Scripts />
             <LiveReload />
