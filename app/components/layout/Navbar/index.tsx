@@ -15,13 +15,6 @@ export default function ShellNavbar () {
                 </Center>
             </Navbar.Section>
             <Divider/>
-            {/*<Navbar.Section>*/}
-            {/*    <Button*/}
-            {/*        fullWidth*/}
-            {/*    >*/}
-            {/*        Search Bar Soon*/}
-            {/*    </Button>*/}
-            {/*</Navbar.Section>*/}
             <Navbar.Section
                 grow
                 component={ScrollArea}

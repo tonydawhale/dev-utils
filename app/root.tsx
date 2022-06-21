@@ -2,7 +2,6 @@ import type { MetaFunction } from "@remix-run/cloudflare";
 import {
   Links,
   LiveReload,
-  Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
@@ -11,11 +10,13 @@ import React, {useEffect} from "react";
 import type { } from '@skyra/discord-components-core';
 
 import Layout from "~/components/layout/Layout";
+import Head from "~/components/Helmet/Head";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
   title: "u.tonydoes.dev",
   viewport: "width=device-width,initial-scale=1",
+    'og:title': "u.tonydoes.dev"
 });
 
 export default function App() {
@@ -35,7 +36,10 @@ export default function App() {
   return (
     <html lang="en">
         <head>
-            <Meta />
+            <Head
+                title={'u.tonydoes.dev'}
+                description={'tony\'s developer utilities'}
+            />
             <Links />
         </head>
         <body>
