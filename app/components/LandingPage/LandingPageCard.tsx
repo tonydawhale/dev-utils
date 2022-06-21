@@ -1,4 +1,4 @@
-import {Button, Card, Image, Text, ThemeIcon, Title, Group, useMantineTheme} from '@mantine/core';
+import { Card, Text, ThemeIcon, Group, useMantineTheme } from '@mantine/core';
 import React from "react";
 import * as icons from "tabler-icons-react";
 

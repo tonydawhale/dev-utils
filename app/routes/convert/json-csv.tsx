@@ -1,6 +1,5 @@
 import React, {useState} from "react";
-import {Container, Grid, NumberInput, Space, Text, Textarea} from "@mantine/core";
-import {Prism} from "@mantine/prism";
+import {Container, Grid, Space, Text, Textarea} from "@mantine/core";
 import { unparse } from "papaparse";
 
 const example = `[

@@ -67,6 +67,7 @@ export default function Unix() {
         />,
         <TextInput
             label={`Your Timestamp`}
+            readOnly={true}
             value={new Date( typeOfTime === "seconds" ? time * 1000 : time).toLocaleString()}
             rightSection={
                 <CopyButton
@@ -77,6 +78,7 @@ export default function Unix() {
         />,
         <TextInput
             label={"Relative"}
+            readOnly={true}
             value={getRelativeTime(typeOfTime === "seconds" ? time * 1000 : time, Date.now())}
             rightSection={
                 <CopyButton
@@ -87,6 +89,7 @@ export default function Unix() {
         />,
         <TextInput
             label={"UTC Timestamp"}
+            readOnly={true}
             value={new Date( typeOfTime === "seconds" ? time * 1000 : time).toUTCString()}
             rightSection={
                 <CopyButton
@@ -97,6 +100,7 @@ export default function Unix() {
         />,
         <TextInput
             label={"ISO Timestamp"}
+            readOnly={true}
             value={new Date( typeOfTime === "seconds" ? time * 1000 : time).toISOString()}
             rightSection={
                 <CopyButton
@@ -107,6 +111,7 @@ export default function Unix() {
         />,
         <TextInput
             label={"Your Local Date"}
+            readOnly={true}
             value={new Date( typeOfTime === "seconds" ? time * 1000 : time).toLocaleDateString()}
             rightSection={
                 <CopyButton
@@ -117,6 +122,7 @@ export default function Unix() {
         />,
         <TextInput
             label={"Your Local Time Stamp"}
+            readOnly={true}
             value={new Date( typeOfTime === "seconds" ? time * 1000 : time).toLocaleTimeString()}
             rightSection={
                 <CopyButton

@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Button, Footer, Navbar, AppShell as MantineAppShell, ColorScheme, MantineProvider} from "@mantine/core";
+import { AppShell as MantineAppShell, ColorScheme, MantineProvider } from "@mantine/core";
 import ShellNavbar from "~/components/layout/Navbar";
 import ShellFooter from "~/components/layout/Footer";
 
@@ -17,7 +17,6 @@ export default function Layout ({children}: { children: React.ReactNode }): JSX.
                     fixed
                     navbarOffsetBreakpoint={"sm"}
                     navbar={ <ShellNavbar/> }
-                    // footer={  }
                 >
                     {children}
                 </MantineAppShell>

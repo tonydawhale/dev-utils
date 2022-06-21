@@ -1,7 +1,7 @@
 import { ActionIcon, Tooltip } from "@mantine/core";
-import {useClipboard, useHover} from '@mantine/hooks';
+import { useClipboard, useHover } from '@mantine/hooks';
 import { Clipboard, Check } from "tabler-icons-react"
-import React, {useState} from "react"
+import React from "react"
 
 export default function CopyButton({payload, toolTipLocation}: {payload: string, toolTipLocation: "top" | "right" | "bottom" | "left"}) {
     const clipboard = useClipboard({ timeout: 1000 });

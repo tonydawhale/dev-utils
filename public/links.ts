@@ -13,7 +13,7 @@ interface redirectSection {
 
 export const redirects: redirectSection[] = [
     {
-        sectionTitle: "Main",
+        sectionTitle: "Core Utilities",
         links: [
             {
                 title: "URL Shortener",
@@ -21,6 +21,13 @@ export const redirects: redirectSection[] = [
                 href: "/url-shortener",
                 enabled: false,
                 icon: "Link"
+            },
+            {
+                title: "Image Host",
+                description: "Upload your images to share them later.",
+                href: "/image-host",
+                enabled: false,
+                icon: "Photo"
             }
         ]
     },

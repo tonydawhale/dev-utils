@@ -1,4 +1,4 @@
-import { Center, Title, Text, Grid } from "@mantine/core";
+import { Title, Grid } from "@mantine/core";
 import { redirects } from "../../public/links";
 import { LandingPageCard } from "~/components/LandingPage/LandingPageCard";
 
@@ -28,7 +28,10 @@ export default function Index() {
                                   group.links.map((item, index) => {
                                       if (item.enabled) {
                                           return (
-                                              <Grid.Col span={1}>
+                                              <Grid.Col
+                                                  span={1}
+                                                  key={`${item.title}-${index}`}
+                                              >
                                                   <LandingPageCard
                                                       key={`${item.title}-${index}`}
                                                       title={item.title}

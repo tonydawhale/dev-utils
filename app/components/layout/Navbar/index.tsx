@@ -1,5 +1,5 @@
 import React from "react";
-import {UnstyledButton, Button, Center, Divider, Navbar, Text, Stack, ScrollArea, Group, ThemeIcon} from "@mantine/core";
+import {UnstyledButton, Center, Divider, Navbar, Text, Stack, ScrollArea, Group, ThemeIcon} from "@mantine/core";
 import { Link } from "@remix-run/react"
 import { redirects } from "../../../../public/links";
 import * as icons from "tabler-icons-react";
@@ -28,12 +28,13 @@ export default function ShellNavbar () {
                             return (
                                 <>
                                     <Divider key={index} label={group.sectionTitle} labelPosition="center"/>
-                                    <Stack spacing={"sm"}>
+                                    <Stack key={index} spacing={"sm"}>
                                         {
                                             group.links.map((item, index) => {
                                                 if (item.enabled) {
                                                     return (
                                                         <UnstyledButton
+                                                            key={`${item.title}-${index}`}
                                                             rel="noopener noreferrer"
                                                             component={"a"}
                                                             href={item.href}
@@ -50,12 +51,17 @@ export default function ShellNavbar () {
                                                                 },
                                                             })}
                                                         >
-                                                            <Group>
-                                                                <ThemeIcon variant="light">
+                                                            <Group
+                                                                key={`${item.title}-${index}`}
+                                                            >
+                                                                <ThemeIcon
+                                                                    variant="light"
+                                                                    key={`${item.title}-${index}`}
+                                                                >
                                                                     {/* @ts-ignore */}
                                                                     {React.createElement(icons[item.icon], {})}
                                                                 </ThemeIcon>
-                                                                <Text size="sm">{item.title}</Text>
+                                                                <Text key={`${item.title}-${index}`} size="sm">{item.title}</Text>
                                                             </Group>
                                                         </UnstyledButton>
                                                     )
