@@ -18,14 +18,14 @@ export const redirects: redirectSection[] = [
             {
                 title: "URL Shortener",
                 description: "Shorten your URLs and save them for later.",
-                href: "/url-shortener",
+                href: "/url",
                 enabled: false,
                 icon: "Link"
             },
             {
                 title: "Image Host",
                 description: "Upload your images to share them later.",
-                href: "/image-host",
+                href: "/img",
                 enabled: false,
                 icon: "Photo"
             }
