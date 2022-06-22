@@ -19,20 +19,9 @@ export default function CsvJson() {
         <>
             <Grid columns={2}>
                 <Grid.Col span={1}>
-                    <Space w={"md"}/>
-                    <Text>
-                        CSV
-                    </Text>
-                </Grid.Col>
-                <Grid.Col span={1}>
-                    <Space w={"md"}/>
-                    <Text>
-                        JSON
-                    </Text>
-                </Grid.Col>
-                <Grid.Col span={1}>
                     <Container fluid>
                         <Textarea
+                            label={"CSV"}
                             value={text}
                             autosize
                             minRows={10}

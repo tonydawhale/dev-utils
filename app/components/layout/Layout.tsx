@@ -1,27 +1,36 @@
 import React, {useState} from "react";
-import { AppShell as MantineAppShell, ColorScheme, MantineProvider } from "@mantine/core";
+import { AppShell as MantineAppShell, ColorScheme, ColorSchemeProvider, MantineProvider } from "@mantine/core";
 import ShellNavbar from "~/components/layout/Navbar";
 import ShellFooter from "~/components/layout/Footer";
+import {NotificationsProvider} from "@mantine/notifications";
 
 export default function Layout ({children}: { children: React.ReactNode }): JSX.Element {
-    const [colorScheme, setColorScheme] = useState<ColorScheme>("light");
+    const [colorScheme, setColorScheme] = useState<ColorScheme>("dark");
     const toggleColorScheme = (value?: ColorScheme) =>
         setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
     return (
         <>
-            <MantineProvider
-                withGlobalStyles
-                withNormalizeCSS
+            <ColorSchemeProvider
+                colorScheme={colorScheme}
+                toggleColorScheme={toggleColorScheme}
             >
-                <MantineAppShell
-                    fixed
-                    navbarOffsetBreakpoint={"sm"}
-                    navbar={ <ShellNavbar/> }
+                <MantineProvider
+                    theme={{ colorScheme }}
+                    withGlobalStyles
+                    withNormalizeCSS
                 >
-                    {children}
-                </MantineAppShell>
-                <ShellFooter/>
-            </MantineProvider>
+                    <MantineAppShell
+                        fixed
+                        navbarOffsetBreakpoint={"sm"}
+                        navbar={ <ShellNavbar/> }
+                    >
+                        <NotificationsProvider>
+                            {children}
+                        </NotificationsProvider>
+                    </MantineAppShell>
+                    <ShellFooter/>
+                </MantineProvider>
+            </ColorSchemeProvider>
         </>
     )
 }

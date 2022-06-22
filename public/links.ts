@@ -87,6 +87,13 @@ export const redirects: redirectSection[] = [
                 href: "/convert/yaml-json",
                 enabled: false,
                 icon: "Replace"
+            },
+            {
+                title: "Base64 String Decode/Encode",
+                description: "Encode and Decode strings to and from base64.",
+                href: "/convert/base64-string",
+                enabled: false,
+                icon: "Replace"
             }
         ]
     },

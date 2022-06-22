@@ -1,6 +1,7 @@
 import React, {useState} from "react";
-import {Container, Grid, Space, Text, Textarea} from "@mantine/core";
+import {Button, Container, createStyles, Grid, Select, Space, Text, Textarea} from "@mantine/core";
 import { unparse } from "papaparse";
+import CopyButton from "~/components/util/CopyButton";
 
 const example = `[
   {
@@ -43,6 +44,7 @@ const convert = (data: any) => {
     }
 }
 
+
 export default function JsonCsv() {
     const [text, setText] = useState(example);
 
@@ -50,20 +52,9 @@ export default function JsonCsv() {
         <>
             <Grid columns={2}>
                 <Grid.Col span={1}>
-                    <Space w={"md"}/>
-                    <Text>
-                        JSON
-                    </Text>
-                </Grid.Col>
-                <Grid.Col span={1}>
-                    <Space w={"md"}/>
-                    <Text>
-                        CSV
-                    </Text>
-                </Grid.Col>
-                <Grid.Col span={1}>
                     <Container fluid>
                         <Textarea
+                            label={"JSON"}
                             value={text}
                             autosize
                             minRows={10}
@@ -73,10 +64,25 @@ export default function JsonCsv() {
                 </Grid.Col>
                 <Grid.Col span={1}>
                     <Container fluid>
+                        <Select data={["1", "2"]}/>
                         <Textarea
+                            label={"CSV"}
                             value={ convert(text.trim()) }
                             autosize
                             minRows={10}
+                            rightSection={
+                                <div
+                                    style={{
+                                        justifyContent: "flex-end",
+                                        alignContent: "flex-start"
+                                    }}
+                                >
+                                    <CopyButton
+                                        payload={ convert(text.trim()) }
+                                        toolTipLocation={"right"}
+                                    />
+                                </div>
+                            }
                         />
                     </Container>
                 </Grid.Col>
