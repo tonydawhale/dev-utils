@@ -92,21 +92,28 @@ export const redirects: redirectSection[] = [
                 title: "Base64 String Decode/Encode",
                 description: "Encode and Decode strings to and from base64.",
                 href: "/convert/base64-string",
-                enabled: false,
+                enabled: true,
                 icon: "Replace"
             }
         ]
     },
     {
-        sectionTitle: "Discord Utilities",
+        sectionTitle: "Generators",
         links: [
             {
-                title: "Discord Embed Generator",
+                title: "Discord DiscordEmbed Generator",
                 description: "Generate Discord embeds and save their JSON.",
-                href: "/discord-embed",
+                href: "/generate/discord-embed",
+                enabled: false,
+                icon: "SquarePlus"
+            },
+            {
+                title: "UUID Generator",
+                description: "Generate UUIDs with various formats",
+                href: "/generate/uuid",
                 enabled: false,
                 icon: "SquarePlus"
             }
         ]
-    }
+    },
 ]

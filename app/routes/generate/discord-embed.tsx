@@ -1,7 +1,7 @@
 import React from "react";
 import {DiscordMessages, DiscordEmbed as DiscordEmbedComponent, DiscordMessage, DiscordMention, DiscordEmbedDescription} from "@skyra/discord-components-react";
 
-export default function Embed() {
+export default function DiscordEmbed() {
     return (
         <DiscordMessages>
             <DiscordMessage

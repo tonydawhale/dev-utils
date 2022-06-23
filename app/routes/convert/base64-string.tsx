@@ -1,44 +1,63 @@
-import React, {useState} from "react";
-import {Button, Container, Grid, Group, Paper, Select, SimpleGrid, Skeleton, Text, Textarea, TextInput, Title, useMantineTheme} from "@mantine/core";
-import {useNotifications} from "@mantine/notifications";
-import {Prism} from "@mantine/prism";
-
-const PRIMARY_COL_HEIGHT = 300;
+import React, { useState } from "react";
+import {Container, Group, Paper, SimpleGrid, Stack, Textarea, SegmentedControl, Center, Box, Button} from "@mantine/core";
+import {useClipboard} from "@mantine/hooks";
 
 export default function Base64String () {
-    const theme = useMantineTheme()
-    const SECONDARY_COL_HEIGHT = PRIMARY_COL_HEIGHT / 2 - theme.spacing.md / 2
+    const [value, setValue] = useState("");
+    const [direction, setDirection] = useState<"encode" | "decode">("encode");
+    const clipboard = useClipboard({ timeout: 500 });
 
     return (
         <Container>
             <SimpleGrid cols={2} spacing={"md"} breakpoints={[{maxWidth: 'sm', cols: 1}]}>
-                <Grid gutter={"md"}>
-                    <Grid.Col>
-                        <Paper shadow="xs" p="md" withBorder>
-                            <Group>
-                                <Select data={["1", "2", "3"]}/>
-                            </Group>
-
-                        </Paper>
-                    </Grid.Col>
-                    {/*<Grid.Col span={6}>*/}
-                    {/*    <TextInput*/}
-                    {/*        height={SECONDARY_COL_HEIGHT}*/}
-                    {/*        radius={"md"}*/}
-                    {/*    />*/}
-                    {/*</Grid.Col>*/}
-                    <Grid.Col>
-                        <TextInput
-                            height={SECONDARY_COL_HEIGHT}
+                <Stack spacing={"md"}>
+                    <Paper shadow="xs" p="md" withBorder>
+                        <Group>
+                            <SegmentedControl
+                                value={direction}
+                                onChange={(e) => setDirection(e as "encode" | "decode")}
+                                data={[
+                                    {
+                                        value: 'encode',
+                                        label: (
+                                            <Center>
+                                                <Box>Encode</Box>
+                                            </Center>
+                                        )
+                                    },
+                                    {
+                                        value: 'decode',
+                                        label: (
+                                            <Center>
+                                                <Box>Decode</Box>
+                                            </Center>
+                                        )
+                                    },
+                                ]}
+                            />
+                            <Button
+                                color={clipboard.copied ? 'teal' : 'blue'}
+                                onClick={() => clipboard.copy(direction === "encode" ? btoa(value) : atob(value))}
+                                children={clipboard.copied ? 'Copied' : 'Copy Result'}
+                            />
+                        </Group>
+                    </Paper>
+                        <Textarea
+                            autosize
+                            minRows={6}
                             radius={"md"}
+                            value={value}
+                            onChange={(e) => setValue(e.target.value)}
+                            placeholder={`Enter text to ${direction === "encode" ? "encode" : "decode"}`}
                         />
-                    </Grid.Col>
-                </Grid>
+                </Stack>
                 <Textarea
                     autosize
                     minRows={10}
-                    // height={PRIMARY_COL_HEIGHT}
                     radius={"md"}
+                    readOnly
+                    value={direction === "encode" ? btoa(value) : atob(value)}
+                    placeholder={direction === "encode" ? "Encoded text" : "Decoded text"}
                 />
             </SimpleGrid>
         </Container>
