@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CopyButton from "~/components/util/CopyButton";
-import { Group, Select, TextInput, Grid, ActionIcon, Tooltip } from "@mantine/core";
+import {Group, Select, TextInput, Grid, ActionIcon, Tooltip, Container, Paper} from "@mantine/core";
 import { RotateClockwise } from "tabler-icons-react";
 
 const units = {
@@ -134,19 +134,18 @@ export default function Unix() {
     ]
 
     return (
-        <Grid columns={1}>
-            {components.map((i, index) => {
-                if ((index + 1) % 2 === 0) {
-                    return (
-                        <Grid.Col span={1} key={index}>
-                            <Group position={"center"}>
-                                {components[index - 1]}
-                                {components[index]}
-                            </Group>
-                        </Grid.Col>
-                    )
-                }
-            })}
-        </Grid>
+        <Container>
+            <Paper shadow="xs" p="md" withBorder>
+                <Grid columns={2} gutter={"md"} align={"flex-start"} justify={"center"}>
+                        {components.map((i, index) =>
+                            <Grid.Col span={1} key={index}>
+                                <Group position={"center"}>
+                                    {components[index]}
+                                </Group>
+                            </Grid.Col>
+                        )}
+                </Grid>
+            </Paper>
+        </Container>
     )
 }

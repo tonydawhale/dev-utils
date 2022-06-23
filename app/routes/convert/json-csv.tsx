@@ -56,103 +56,107 @@ export default function JsonCsv() {
 
     return (
         <Container>
-            <SimpleGrid cols={2} spacing={"md"} breakpoints={[{maxWidth: 'sm', cols: 1}]}>
-                <Paper shadow="xs" p="md" withBorder>
-                    <Stack spacing={"md"}>
-                        <Grid columns={2} gutter={"md"} grow justify={"center"}>
-                            <Grid.Col span={2}>
-                                <Select
-                                    label={"Delimiter"}
-                                    value={delimiter}
-                                    data={[
-                                        {
-                                            value: ",",
-                                            label: "Use Comma as Delimiter"
-                                        },
-                                        {
-                                            value: ";",
-                                            label: "Use Semicolon as Delimiter"
-                                        },
-                                        {
-                                            value: "|",
-                                            label: "Use Pipe as Delimiter"
-                                        },
-                                        {
-                                            value: ":",
-                                            label: "Use Colon as Delimiter"
-                                        },
-                                        {
-                                            value: " ",
-                                            label: "Use Space as Delimiter"
-                                        }
-                                    ]}
-                                    onChange={(e) => setDelimiter(e as delimiter)}
-                                />
-                            </Grid.Col>
-                            <Grid.Col span={1}>
-                                <Button
-                                    leftIcon={clipboard.copied ? <Check/> : <Copy/>}
-                                    onClick={() => clipboard.copy(convert(text.trim(), delimiter))}
-                                    children={clipboard.copied ? 'Copied' : 'Copy Result'}
-                                    color={clipboard.copied ? 'teal' : 'blue'}
-                                    fullWidth
-                                />
-                            </Grid.Col>
-                            <Grid.Col span={1}>
-                                <Button
-                                    leftIcon={<Download/>}
-                                    fullWidth
-                                    onClick={() => {
-                                        const blob = new Blob([convert(text.trim(), delimiter)], {type: "text/plain"});
-                                        const url = URL.createObjectURL(blob);
-                                        const link = document.createElement("a");
-                                        link.href = url;
-                                        link.download = `output.csv`;
-                                        document.body.appendChild(link);
-                                        return link.click();
-                                    }}
-                                    children={'Download'}
-                                />
-                            </Grid.Col>
-                            <Grid.Col span={1}>
-                                <Button
-                                    leftIcon={<InfoCircle/>}
-                                    onClick={() => setText(example)}
-                                    children={"Example"}
-                                    fullWidth
-                                />
-                            </Grid.Col>
-                            <Grid.Col span={1}>
-                                <Button
-                                    leftIcon={<Trash/>}
-                                    color={"red"}
-                                    onClick={() => setText("[]")}
-                                    children={"Clear"}
-                                    fullWidth
-                                />
-                            </Grid.Col>
-                        </Grid>
+            <Grid columns={2} gutter={"md"} align={"flex-start"} justify={"center"}>
+                <Grid.Col span={1}>
+                    <Paper shadow="xs" p="md" withBorder>
+                        <Stack spacing={"md"}>
+                            <Grid columns={2} gutter={"md"} grow justify={"center"}>
+                                <Grid.Col span={2}>
+                                    <Select
+                                        label={"Delimiter"}
+                                        value={delimiter}
+                                        data={[
+                                            {
+                                                value: ",",
+                                                label: "Use Comma as Delimiter"
+                                            },
+                                            {
+                                                value: ";",
+                                                label: "Use Semicolon as Delimiter"
+                                            },
+                                            {
+                                                value: "|",
+                                                label: "Use Pipe as Delimiter"
+                                            },
+                                            {
+                                                value: ":",
+                                                label: "Use Colon as Delimiter"
+                                            },
+                                            {
+                                                value: " ",
+                                                label: "Use Space as Delimiter"
+                                            }
+                                        ]}
+                                        onChange={(e) => setDelimiter(e as delimiter)}
+                                    />
+                                </Grid.Col>
+                                <Grid.Col span={1}>
+                                    <Button
+                                        leftIcon={clipboard.copied ? <Check/> : <Copy/>}
+                                        onClick={() => clipboard.copy(convert(text.trim(), delimiter))}
+                                        children={clipboard.copied ? 'Copied' : 'Copy Result'}
+                                        color={clipboard.copied ? 'teal' : 'blue'}
+                                        fullWidth
+                                    />
+                                </Grid.Col>
+                                <Grid.Col span={1}>
+                                    <Button
+                                        leftIcon={<Download/>}
+                                        fullWidth
+                                        onClick={() => {
+                                            const blob = new Blob([convert(text.trim(), delimiter)], {type: "text/plain"});
+                                            const url = URL.createObjectURL(blob);
+                                            const link = document.createElement("a");
+                                            link.href = url;
+                                            link.download = `output.csv`;
+                                            document.body.appendChild(link);
+                                            return link.click();
+                                        }}
+                                        children={'Download'}
+                                    />
+                                </Grid.Col>
+                                <Grid.Col span={1}>
+                                    <Button
+                                        leftIcon={<InfoCircle/>}
+                                        onClick={() => setText(example)}
+                                        children={"Example"}
+                                        fullWidth
+                                    />
+                                </Grid.Col>
+                                <Grid.Col span={1}>
+                                    <Button
+                                        leftIcon={<Trash/>}
+                                        color={"red"}
+                                        onClick={() => setText("[]")}
+                                        children={"Clear"}
+                                        fullWidth
+                                    />
+                                </Grid.Col>
+                            </Grid>
+                            <Textarea
+                                autosize
+                                minRows={6}
+                                radius={"md"}
+                                value={text}
+                                onChange={(value) => setText(value.target.value)}
+                                placeholder={`Enter JSON to Convert`}
+                            />
+                        </Stack>
+                    </Paper>
+                </Grid.Col>
+                <Grid.Col span={1}>
+                    <Paper shadow="xs" p="md" withBorder>
                         <Textarea
                             autosize
-                            minRows={6}
+                            minRows={14}
                             radius={"md"}
-                            value={text}
-                            onChange={(value) => setText(value.target.value)}
-                            placeholder={`Enter JSON to Convert`}
+                            readOnly
+                            value={convert(text.trim(), delimiter)}
+                            placeholder={"CSV"}
                         />
-                    </Stack>
-                </Paper>
-                <Paper shadow="xs" p="md" withBorder>
-                    <Textarea
-                        autosize
-                        minRows={14}
-                        radius={"md"}
-                        readOnly
-                        value={convert(text.trim(), delimiter)}
-                        placeholder={"CSV"}
-                    />
-                </Paper>
-            </SimpleGrid>
+                    </Paper>
+                </Grid.Col>
+            </Grid>
         </Container>
     )
 }
