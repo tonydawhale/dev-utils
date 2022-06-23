@@ -55,42 +55,42 @@ export const redirects: redirectSection[] = [
         links: [
             {
                 title: "Unix Time Converter",
-                description: "Convert between Unix time and human readable time.",
+                description: "Convert between Unix time and human readable time",
                 href: "/convert/unix",
                 enabled: true,
                 icon: "Clock"
             },
             {
                 title: "JSON to CSV",
-                description: "Convert JSON to CSV.",
+                description: "Convert JSON to CSV",
                 href: "/convert/json-csv",
                 enabled: true,
                 icon: "Replace"
             },
             {
                 title: "CSV to JSON",
-                description: "Convert CSV to JSON.",
+                description: "Convert CSV to JSON",
                 href: "/convert/csv-json",
                 enabled: true,
                 icon: "Replace"
             },
             {
                 title: "JSON to YAML",
-                description: "Convert JSON to YAML.",
+                description: "Convert JSON to YAML",
                 href: "/convert/json-yaml",
                 enabled: false,
                 icon: "Replace"
             },
             {
                 title: "YAML to JSON",
-                description: "Convert YAML to JSON.",
+                description: "Convert YAML to JSON",
                 href: "/convert/yaml-json",
                 enabled: false,
                 icon: "Replace"
             },
             {
                 title: "Base64 String Decode/Encode",
-                description: "Encode and Decode strings to and from base64.",
+                description: "Encode and Decode strings to and from base64",
                 href: "/convert/base64-string",
                 enabled: true,
                 icon: "Replace"
@@ -102,16 +102,16 @@ export const redirects: redirectSection[] = [
         links: [
             {
                 title: "Discord DiscordEmbed Generator",
-                description: "Generate Discord embeds and save their JSON.",
+                description: "Uuid Discord embeds and save their JSON",
                 href: "/generate/discord-embed",
                 enabled: false,
                 icon: "SquarePlus"
             },
             {
                 title: "UUID Generator",
-                description: "Generate UUIDs with various formats",
+                description: "Uuid UUIDs with various formats",
                 href: "/generate/uuid",
-                enabled: false,
+                enabled: true,
                 icon: "SquarePlus"
             }
         ]

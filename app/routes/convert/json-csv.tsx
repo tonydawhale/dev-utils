@@ -1,7 +1,11 @@
-import React, {useState} from "react";
-import {Button, Container, createStyles, Grid, Select, Space, Text, Textarea} from "@mantine/core";
-import { unparse } from "papaparse";
-import CopyButton from "~/components/util/CopyButton";
+import React, { useState } from "react";
+import {Button, Container, Grid, Paper, Select, SimpleGrid, Stack, Textarea} from "@mantine/core";
+import {parse, unparse} from "papaparse";
+import { useClipboard} from "@mantine/hooks";
+import {Check, Copy, Download, InfoCircle, Trash} from "tabler-icons-react";
+import {useNotifications} from "@mantine/notifications";
+
+declare type delimiter = "," | ";" | "|" | ":" | " ";
 
 const example = `[
   {
@@ -36,9 +40,9 @@ const example = `[
   }
 ]`
 
-const convert = (data: any) => {
+const convert = (data: any, delimiter: string) => {
     try {
-        return unparse(JSON.parse(data),{delimiter: ";"})
+        return unparse(JSON.parse(data),{delimiter})
     } catch {
         return "";
     }
@@ -46,47 +50,109 @@ const convert = (data: any) => {
 
 
 export default function JsonCsv() {
-    const [text, setText] = useState(example);
+    const [text, setText] = useState("");
+    const [delimiter, setDelimiter] = useState<delimiter>(";");
+    const clipboard = useClipboard({ timeout: 500 });
 
     return (
-        <>
-            <Grid columns={2}>
-                <Grid.Col span={1}>
-                    <Container fluid>
-                        <Textarea
-                            label={"JSON"}
-                            value={text}
-                            autosize
-                            minRows={10}
-                            onChange={(value) => setText(value.target.value)}
-                        />
-                    </Container>
-                </Grid.Col>
-                <Grid.Col span={1}>
-                    <Container fluid>
-                        <Select data={["1", "2"]}/>
-                        <Textarea
-                            label={"CSV"}
-                            value={ convert(text.trim()) }
-                            autosize
-                            minRows={10}
-                            rightSection={
-                                <div
-                                    style={{
-                                        justifyContent: "flex-end",
-                                        alignContent: "flex-start"
+        <Container>
+            <SimpleGrid cols={2} spacing={"md"} breakpoints={[{maxWidth: 'sm', cols: 1}]}>
+                <Paper shadow="xs" p="md" withBorder>
+                    <Stack spacing={"md"}>
+                        <Grid columns={2} gutter={"md"} grow justify={"center"}>
+                            <Grid.Col span={2}>
+                                <Select
+                                    label={"Delimiter"}
+                                    value={delimiter}
+                                    data={[
+                                        {
+                                            value: ",",
+                                            label: "Use Comma as Delimiter"
+                                        },
+                                        {
+                                            value: ";",
+                                            label: "Use Semicolon as Delimiter"
+                                        },
+                                        {
+                                            value: "|",
+                                            label: "Use Pipe as Delimiter"
+                                        },
+                                        {
+                                            value: ":",
+                                            label: "Use Colon as Delimiter"
+                                        },
+                                        {
+                                            value: " ",
+                                            label: "Use Space as Delimiter"
+                                        }
+                                    ]}
+                                    onChange={(e) => setDelimiter(e as delimiter)}
+                                />
+                            </Grid.Col>
+                            <Grid.Col span={1}>
+                                <Button
+                                    leftIcon={clipboard.copied ? <Check/> : <Copy/>}
+                                    onClick={() => clipboard.copy(convert(text.trim(), delimiter))}
+                                    children={clipboard.copied ? 'Copied' : 'Copy Result'}
+                                    color={clipboard.copied ? 'teal' : 'blue'}
+                                    fullWidth
+                                />
+                            </Grid.Col>
+                            <Grid.Col span={1}>
+                                <Button
+                                    leftIcon={<Download/>}
+                                    fullWidth
+                                    onClick={() => {
+                                        const blob = new Blob([convert(text.trim(), delimiter)], {type: "text/plain"});
+                                        const url = URL.createObjectURL(blob);
+                                        const link = document.createElement("a");
+                                        link.href = url;
+                                        link.download = `output.csv`;
+                                        document.body.appendChild(link);
+                                        return link.click();
                                     }}
-                                >
-                                    <CopyButton
-                                        payload={ convert(text.trim()) }
-                                        toolTipLocation={"right"}
-                                    />
-                                </div>
-                            }
+                                    children={'Download'}
+                                />
+                            </Grid.Col>
+                            <Grid.Col span={1}>
+                                <Button
+                                    leftIcon={<InfoCircle/>}
+                                    onClick={() => setText(example)}
+                                    children={"Example"}
+                                    fullWidth
+                                />
+                            </Grid.Col>
+                            <Grid.Col span={1}>
+                                <Button
+                                    leftIcon={<Trash/>}
+                                    color={"red"}
+                                    onClick={() => setText("[]")}
+                                    children={"Clear"}
+                                    fullWidth
+                                />
+                            </Grid.Col>
+                        </Grid>
+                        <Textarea
+                            autosize
+                            minRows={6}
+                            radius={"md"}
+                            value={text}
+                            onChange={(value) => setText(value.target.value)}
+                            placeholder={`Enter JSON to Convert`}
                         />
-                    </Container>
-                </Grid.Col>
-            </Grid>
-        </>
+                    </Stack>
+                </Paper>
+                <Paper shadow="xs" p="md" withBorder>
+                    <Textarea
+                        autosize
+                        minRows={14}
+                        radius={"md"}
+                        readOnly
+                        value={convert(text.trim(), delimiter)}
+                        placeholder={"CSV"}
+                    />
+                </Paper>
+            </SimpleGrid>
+        </Container>
     )
 }

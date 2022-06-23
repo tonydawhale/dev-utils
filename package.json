@@ -32,7 +32,8 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
-    "tabler-icons-react": "^1.49.0"
+    "tabler-icons-react": "^1.49.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^3.10.0",
@@ -43,6 +44,7 @@
     "@types/react": "^17.0.45",
     "@types/react-dom": "^17.0.17",
     "@types/react-helmet": "^6.1.5",
+    "@types/uuid": "^8.3.4",
     "eslint": "^8.15.0",
     "npm-run-all": "^4.1.5",
     "remix-esbuild-override": "^3.0.4",
